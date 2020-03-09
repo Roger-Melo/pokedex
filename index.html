@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>PokeDex</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Pokedex</h1>
+    <ul data-js="pokedex" class="pokedex"></ul>
+  </div>
+  
+  <script src="./app.js"></script>
+</body>
+</html>
