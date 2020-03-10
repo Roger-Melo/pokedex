@@ -26,10 +26,82 @@ h1 {
 .card {
 	list-style: none;
 	padding: 40px;
-	background-color: #f4f4f4;
 	color: #222;
 	text-align: center;
 	border-radius: 20px;
+	position: relative;
+}
+
+.card::after {
+	content: "";
+	display: block;
+	width: 60%;
+	height: 55%;
+	border-radius: 100%;
+	background-color: #fff;
+	position: absolute;
+	top: 10%;
+	left: 20%;
+}
+
+.steel {
+	background-color: #f4f4f4;
+}
+
+.fire {
+	background-color: #FDDFDF;
+}
+
+.grass {
+	background-color: #DEFDE0;
+}
+
+.electric {
+	background-color: #FCF7DE;
+}
+
+.water, .ice {
+	background-color: #DEF3FD;
+}
+
+.ground {
+	background-color: #f4e7da;
+}
+
+.rock {
+	background-color: #d5d5d4;
+}
+
+.fairy {
+	background-color: #fceaff;
+}
+
+.poison {
+	background-color: #98d7a5;
+}
+
+.bug {
+	background-color: #f8d5a3;
+}
+
+.dragon {
+	background-color: #97b3e6;
+}
+
+.psychic {
+	background-color: #eaeda1;
+}
+
+.flying {
+	background-color: #F5F5F5;
+}
+
+.fighting {
+	background-color: #E6E0D4;
+}
+
+.normal {
+	background-color: #F5F5F5;
 }
 
 .card:hover {
@@ -41,15 +113,22 @@ h1 {
 	margin-bottom: 0px;
 	font-size: 32px;
 	font-weight: normal;
+	position: relative;
+	z-index: 2;
 }
+
 .card-subtitle {
 	margin-top: 5px;
 	color: #666;
 	font-weight: lighter;
+	position: relative;
+	z-index: 2;
 }
 
 .card-image {
 	height: 180px;
+	position: relative;
+	z-index: 2;
 }
 
 @keyframes bounce {
