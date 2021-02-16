@@ -16,7 +16,7 @@ body {
 	justify-content: flex-end;
 }
 
-#tipo-pokemon{
+select{
 	background-color: #0890ff;
   color: white;
   padding: 12px;
@@ -28,6 +28,14 @@ body {
   appearance: button;
   outline: none;
 	border-radius: 20px;
+	margin-left: 10px;
+}
+
+label{
+	color:#0890ff;
+	margin:0 auto;
+	margin-top: 15px;
+
 }
 
 h1 {
