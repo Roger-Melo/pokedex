@@ -11,9 +11,29 @@ body {
 	margin: 0 auto;
 }
 
+#controle{
+	display: flex;
+	justify-content: flex-end;
+}
+
+#tipo-pokemon{
+	background-color: #0890ff;
+  color: white;
+  padding: 12px;
+  width: 150px;
+  border: none;
+  font-size: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+	border-radius: 20px;
+}
+
 h1 {
 	text-align: center;
 	font-size: 54px;
+	color:#0890ff
 }
 
 .pokedex {
@@ -146,4 +166,6 @@ h1 {
 	100% {
 			transform: translateY(0);
 	}
+
+
 }
