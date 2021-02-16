@@ -16,4 +16,4 @@ Para testar os endpoints pode utilizar o software postman: https://www.postman.c
   - Video aula: https://youtu.be/Uptu3NrBFBM
 2. Eu gostaria de ver os pokemons por tipos https://pokeapi.co/docs/v2#types
 3. Eu gostaria de ver os detalhes de cada pokemon clicando na foto dele https://www.pokemon.com/br/pokedex/bulbasaur
-4. Eu gostaria de ver os pokenons por habitat https://pokeapi.co/docs/v2#pokemon-habitats
+4. Eu gostaria de ver os pokemons por habitat https://pokeapi.co/docs/v2#pokemon-habitats
