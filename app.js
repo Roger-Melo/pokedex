@@ -1,4 +1,38 @@
 const pokedex = document.querySelector('[data-js="pokedex"]');
+const tipoSelect = document.querySelector("#tipo-pokemon");
+const pokemons = [];
+
+tipoSelect.addEventListener("change", (event) => {
+  const tipo = event.target.value;
+  pokedex.innerHTML = "";
+  getPokemonsByType(tipo);
+});
+
+processResponse = async (response) => {
+  const pokemonJson = await response.json();
+  const pokemon = {
+    types: pokemonJson.types,
+    name: pokemonJson.name,
+    id: pokemonJson.id,
+  };
+  pokemons.push(pokemon);
+  fillHTML(pokemon);
+};
+
+const getPokemonsByType = async (tipo) => {
+  pokemons.forEach((pokemon) => {
+    tipos = pokemon.types;
+    for (let index = 0; index < tipos.length; index++) {
+      const t = tipos[index];
+
+      if (t.type.name == tipo) {
+        console.log(pokemon);
+        fillHTML(pokemon);
+        break;
+      }
+    }
+  });
+};
 
 const start = () => {
   fetch(`https://pokeapi.co/api/v2/pokemon/`)
@@ -7,18 +41,12 @@ const start = () => {
 };
 
 const getPokemons = async (numberPokemons) => {
-  for (let index = 1; index < numberPokemons; index++) {
+  for (let index = 1; index < 150; index++) {
     try {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${index}`
       );
-      const pokemonJson = await response.json();
-      const pokemon = {
-        types: pokemonJson.types,
-        name: pokemonJson.name,
-        id: pokemonJson.id,
-      };
-      fillHTML(pokemon);
+      processResponse(response);
     } catch (error) {
       console.log(error);
     }
@@ -32,10 +60,14 @@ const getPokemon = async (nome) => {
 
 getTypes = (pokemon) => {
   const tipos = [];
-  pokemon.types.forEach((tipo) => {
+  if (pokemon.types.length > 0) {
+    pokemon.types.forEach((tipo) => {
+      tipos.push(tipo.type.name);
+    });
+    return tipos.join(" | ");
+  } else {
     tipos.push(tipo.type.name);
-  });
-  return tipos.join(" | ");
+  }
 };
 
 const fillHTML = (p) => {
