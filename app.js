@@ -1,5 +1,6 @@
 const pokedex = document.querySelector('[data-js="pokedex"]');
 const tipoSelect = document.querySelector("#tipo-pokemon");
+const habitatSelect = document.querySelector("#habitat-pokemon");
 const pokemons = [];
 
 tipoSelect.addEventListener("change", (event) => {
@@ -8,12 +9,19 @@ tipoSelect.addEventListener("change", (event) => {
   getPokemonsByType(tipo);
 });
 
+habitatSelect.addEventListener("change", (event) => {
+  const habitat = event.target.value;
+  pokedex.innerHTML = "";
+  getPokemonsByHabitat(habitat);
+});
+
 processResponse = async (response) => {
   const pokemonJson = await response.json();
   const pokemon = {
     types: pokemonJson.types,
     name: pokemonJson.name,
     id: pokemonJson.id,
+    habitat: pokemonJson.habitat,
   };
   pokemons.push(pokemon);
   fillHTML(pokemon);
@@ -32,6 +40,42 @@ const getPokemonsByType = async (tipo) => {
       }
     }
   });
+};
+
+const getPokemonsByHabitat = async (habitat) => {
+  response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon-habitat/${habitat}`
+  );
+  const habitatJson = await response.json();
+  pokemonSpecies = habitatJson.pokemon_species;
+  pokemonSpecies.forEach((pokemon) => {
+    getPokemon(pokemon.name)
+      .then((pokemonData) => pokemonData.json())
+      .then((pokemonJson) => {
+        const pokemon = {
+          types: pokemonJson.types,
+          name: pokemonJson.name,
+          id: pokemonJson.id,
+          habitat: habitat,
+        };
+        console.log(pokemon);
+        fillHTML(pokemon);
+      });
+  });
+  // habitatJson.then((json) => console.log(json.pokemon_species));
+  // console.log(pokemons[0]);
+  // pokemons.forEach((pokemon) => {
+  //   tipos = pokemon.types;
+  //   for (let index = 0; index < tipos.length; index++) {
+  //     const t = tipos[index];
+
+  //     if (t.type.name == tipo) {
+  //       console.log(pokemon);
+  //       fillHTML(pokemon);
+  //       break;
+  //     }
+  //   }
+  // });
 };
 
 const start = () => {
