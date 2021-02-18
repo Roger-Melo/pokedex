@@ -3,17 +3,18 @@ const tipoSelect = document.querySelector("#tipo-pokemon");
 const habitatSelect = document.querySelector("#habitat-pokemon");
 const pokemons = [];
 
-tipoSelect.addEventListener("change", (event) => {
-  const tipo = event.target.value;
-  pokedex.innerHTML = "";
-  getPokemonsByType(tipo);
-});
-
-habitatSelect.addEventListener("change", (event) => {
-  const habitat = event.target.value;
-  pokedex.innerHTML = "";
-  getPokemonsByHabitat(habitat);
-});
+if (tipoSelect) {
+  tipoSelect.addEventListener("change", (event) => {
+    const tipo = event.target.value;
+    pokedex.innerHTML = "";
+    getPokemonsByType(tipo);
+  });
+  habitatSelect.addEventListener("change", (event) => {
+    const habitat = event.target.value;
+    pokedex.innerHTML = "";
+    getPokemonsByHabitat(habitat);
+  });
+}
 
 processResponse = async (response) => {
   const pokemonJson = await response.json();
@@ -34,7 +35,6 @@ const getPokemonsByType = async (tipo) => {
       const t = tipos[index];
 
       if (t.type.name == tipo) {
-        console.log(pokemon);
         fillHTML(pokemon);
         break;
       }
@@ -58,30 +58,24 @@ const getPokemonsByHabitat = async (habitat) => {
           id: pokemonJson.id,
           habitat: habitat,
         };
-        console.log(pokemon);
         fillHTML(pokemon);
       });
   });
-  // habitatJson.then((json) => console.log(json.pokemon_species));
-  // console.log(pokemons[0]);
-  // pokemons.forEach((pokemon) => {
-  //   tipos = pokemon.types;
-  //   for (let index = 0; index < tipos.length; index++) {
-  //     const t = tipos[index];
-
-  //     if (t.type.name == tipo) {
-  //       console.log(pokemon);
-  //       fillHTML(pokemon);
-  //       break;
-  //     }
-  //   }
-  // });
 };
 
 const start = () => {
   fetch(`https://pokeapi.co/api/v2/pokemon/`)
     .then((response) => response.json())
     .then((json) => getPokemons(json.count));
+};
+
+const detalharPokemon = (id) => {
+  getPokemon(id)
+    .then((data) => data.json())
+    .then((json) => {
+      localStorage.setItem("pokemon", JSON.stringify(json));
+    })
+    .then(() => (window.location.href = "pokemon.html"));
 };
 
 const getPokemons = async (numberPokemons) => {
@@ -113,10 +107,10 @@ getTypes = (pokemon) => {
     tipos.push(tipo.type.name);
   }
 };
-
-const fillHTML = (p) => {
+fillHTML = (p) => {
   const tipos = getTypes(p);
-  pokedex.innerHTML += `<li class="card ${p.types[0].type.name}">
+  if (pokedex) {
+    pokedex.innerHTML += `<li onclick="detalharPokemon(${p.id})" class="card ${p.types[0].type.name}">
       <img
         class="card-image"
         alt="${p.name}"
@@ -125,6 +119,7 @@ const fillHTML = (p) => {
       <h2 class="card-title">${p.id}. ${p.name} </h2>
       <p class="card-subtitle">${tipos}</p>
     </li>`;
+  }
 };
 
 start();
