@@ -18,8 +18,11 @@ const generateHTML = pokemons => {
 
     return accumulator;
   }, '');
+}
 
-  
+const insertPokemonIntoPage = pokemons => {
+  const ul = document.querySelector('[data-js="pokedex"]');
+  ul.innerHTML= pokemons;
 }
 
 const fetchPokemon = () => {
@@ -27,10 +30,7 @@ const fetchPokemon = () => {
 
   Promise.all(pokemonPromises)
     .then(generateHTML)
-    .then(pokemons => {
-      const ul = document.querySelector('[data-js="pokedex"]');
-      ul.innerHTML= pokemons;
-    });
+    .then(insertPokemonIntoPage);
 }
 
 fetchPokemon();
