@@ -1,6 +1,6 @@
-const fetchPokemon = () => {
-  const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
+const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
+const fetchPokemon = () => {
   const pokemonPromises = [];
 
   for (let index = 1; index <= 150; index++) {
