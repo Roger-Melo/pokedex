@@ -12,8 +12,6 @@ const fetchPokemon = () => {
 
   Promise.all(pokemonPromises)
     .then(pokemons => {
-      //console.log(pokemons);
-
       const lisPokemons = pokemons.reduce((accumulator, pokemon) => {
         const types = pokemon.types.map(typeInfo => typeInfo.type.name);
         accumulator += `
@@ -27,6 +25,10 @@ const fetchPokemon = () => {
         return accumulator;
       }, '');
        console.log(lisPokemons);
+
+       const ul = document.querySelector('[data-js="pokedex"]');
+
+       ul.innerHTML= lisPokemons;
 
     })
 }
