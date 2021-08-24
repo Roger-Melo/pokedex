@@ -18,6 +18,7 @@ const fetchPokemon = () => {
         const types = pokemon.types.map(typeInfo => typeInfo.type.name);
         accumulator += `
         <li class="card">
+          <img class="card-image ${types[0]}" alt="${pokemon.name}" src="https://cdn.traction.one/pokedex/pokemon/${pokemon.id}.png" />
           <h2 class=>${pokemon.id}.${pokemon.name}</h2>
           <p class="card-subtitle">${types.join(' | ')}</p>
         <li>
