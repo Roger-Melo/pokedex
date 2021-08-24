@@ -1,18 +1,12 @@
 const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`;
 
-const fetchPokemon = () => {
-  const generatePokemonPromises = () => Array(150).fill().map((_, index) =>
-  fetch(getPokemonUrl(index+1))
-    .then(response => response.json())
-  );
- const pokemonPromises = generatePokemonPromises();
+const generatePokemonPromises = () => Array(150).fill().map((_, index) =>
+fetch(getPokemonUrl(index+1))
+  .then(response => response.json())
+);
 
-  /*for (let index = 1; index <= 150; index++) {
-    pokemonPromises.push(
-      fetch(getPokemonUrl(index))
-        .then(response => response.json())
-    );
-  } */
+const fetchPokemon = () => {
+ const pokemonPromises = generatePokemonPromises();
 
   Promise.all(pokemonPromises)
     .then(pokemons => {
